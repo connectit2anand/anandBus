@@ -1,10 +1,10 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import LandingPage from "../Pages/LandingPage";
-import RouteManagement from "../Pages/RouteManagement/index";
-import BusManagement from "../Pages/BusManagement";
+import BusManagement from "../Pages/BusManagement/Index";
 import AddBus from "../Pages/BusManagement/AddBus";
 import AddAndViewRoutes from "../Pages/RouteManagement/AddAndViewRoutes";
+import RouteManagement from "../Pages/RouteManagement/Index";
 
 // import { Container } from './styles';
 

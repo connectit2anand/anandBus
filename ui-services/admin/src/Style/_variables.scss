@@ -1,0 +1,47 @@
+$base1:#002347;
+$base2:#455c72;
+$body:#F7F7F7;
+$navbtn:rgba(206, 203, 203, 0.071);
+$shadow:rgba(112, 112, 112, 0.231);
+$highlight1: #FF9636;
+$thead:#CCE7FF;
+$hover: #6a11fa;
+$error: #FC5555;
+$white1: #fff;
+$white2: #F6F6F6;
+//$light1:#f6f6f6;
+$light1:#E8F0F9;
+$dark1: #707070;
+$dark2: #E6E6E6;
+$dark3:#606060;
+$black:#2e2e2e;
+
+
+//Fonts
+
+$font1 : "'DM Serif Display', serif";
+
+
+@mixin tablet {
+    @media only screen and (min-width:768px){
+        @content;
+    }
+}
+
+@mixin desktop {
+    @media only screen and (min-width:990px){
+        @content;
+    }
+}
+
+@mixin large {
+    @media only screen and (min-width:1199px){
+        @content;
+    }
+}
+
+@mixin mobile {
+    @media only screen and (max-width:767px){
+        @content;
+    }
+}

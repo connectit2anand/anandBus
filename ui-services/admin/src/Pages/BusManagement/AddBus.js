@@ -16,6 +16,9 @@ import axios from "axios";
 import SnackToast from "../../components/SnackToast/Index";
 import Loading from "../../components/Loading/Loading";
 import { useEffect } from "react";
+import { DesktopDatePicker, LocalizationProvider, TimePicker } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns"
 
 const baseUrl = 'http://localhost:8080'
 
@@ -28,11 +31,13 @@ function AddBus() {
   const [fair, setFair] = useState("");
   const [routes, setRoutes] = useState([]);
   const [routeId, setRouteId] = useState();
+  const [dateOfJourney, setDateOfJourney] = useState(null)
 
   const [openSnack, setOpenSnack] = useState(false);
   const [loading, setLoading] = useState();
   const [severity, setSeverity] = useState('success');
   const [message, setMessage] = useState('');
+  const [timeOfJourney, setTimeOfJourney] = useState(null);
 
   const handleBusNameChange = (event) => {
     setBusName(event.target.value);
@@ -62,8 +67,23 @@ function AddBus() {
     setOpenSnack(false);
   };
 
+  const getDate = (date) => {
+    let dd = new Date(date).getDate() + "";
+    if (dd.length == 1) {
+        dd = 0 + dd;
+    }
+    let mm = new Date(date).getMonth() + "";
+    if (mm.length == 1) {
+        mm = 0 + mm;
+    }
+    let yyyy = new Date(date).getFullYear();
+    let updatedDate = `${yyyy}-${mm}-${dd}`
+    return updatedDate;
+}
+
   const handleSubmit = (event) => {
     event.preventDefault();
+    let date = getDate(dateOfJourney);
     setLoading(true);
     let request = {
       busNumber: busNumber,
@@ -110,14 +130,22 @@ function AddBus() {
     setRouteId(event.target.value);
   }
 
+  const handleDateOfJourneyChange = (event) => {
+    setDateOfJourney(event);
+  }
+
+  const handleTimeChange = (event) => {
+    setTimeOfJourney(event);
+  }
+
   return (
     <Container maxWidth="sm">
       {Loading ? <Loading open={loading} /> : ""}
       <h2>Add New Bus</h2>
       <SnackToast open={openSnack} onClose={handleClose} severity={severity} message={message} />
       <form onSubmit={handleSubmit}>
-        <Grid container spacing={4}>
-        <Grid item={true} xs={12}>
+      <Grid container mb={2} spacing={2} >
+        <Grid xs={12} item={true} sm={6} lg={12}>
             <FormControl fullWidth>
               <InputLabel>Select Route</InputLabel>
               <Select
@@ -131,55 +159,85 @@ function AddBus() {
               </Select>
             </FormControl>
           </Grid>
-          <Grid item xs={12}>
-            <TextField
+          <Grid xs={12} item={true} sm={6} lg={6}>
+            <TextField fullWidth
               label="Bus Number"
               variant="outlined"
               value={busNumber}
               onChange={handleBusNumberChange}
             />
           </Grid>
-          <Grid item xs={12}>
-            <TextField
+          <Grid xs={12} item={true} sm={6} lg={6}>
+            <TextField fullWidth
               label="Bus Name"
               variant="outlined"
               value={busName}
               onChange={handleBusNameChange}
             />
           </Grid>
-          <Grid item xs={12}>
-            <TextField
+          <Grid xs={12} item={true} sm={6} lg={6}>
+            <TextField fullWidth
               label="Driver Name"
               variant="outlined"
               value={driverName}
               onChange={handleDriverNameChange}
             />
           </Grid>
-          <Grid item xs={12}>
-            <TextField
-              label="Bus Type"
-              variant="outlined"
-              value={busType}
-              onChange={handleBusTypeChange}
-            />
+          <Grid xs={12} item={true} sm={6} lg={6}>
+            
+            <FormControl fullWidth>
+            <InputLabel>Bus Type</InputLabel>
+              <Select onChange={handleBusTypeChange} input={<OutlinedInput label="Bus Type" />}>
+                    <MenuItem key={1} value="AC">AC</MenuItem>
+                    <MenuItem key={2} value="NON-AC">NON-AC</MenuItem>
+              </Select>
+            </FormControl>
           </Grid>
          
-          <Grid item xs={12}>
-            <TextField
+          <Grid xs={12} item={true} sm={6} lg={6}>
+            <TextField fullWidth
               label="Total Seats"
               variant="outlined"
               value={totalSeat}
               onChange={handleTotalSeatChange}
             />
           </Grid>
-          <Grid item xs={12}>
-            <TextField
+          <Grid xs={12} item={true} sm={6} lg={6}>
+            <TextField fullWidth
               label="Fair"
               variant="outlined"
               value={fair}
               onChange={handleFairChange}
             />
           </Grid>
+
+          <Grid xs={12} item={true} sm={6} lg={6}>
+                            <FormControl fullWidth>
+                                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                    <DesktopDatePicker id="effDate"
+                                        label="Date Of Journey"
+                                        inputFormat="YYYY/MM/DD"
+                                        value={dateOfJourney}
+                                        onChange={handleDateOfJourneyChange}
+                                        name="effectiveDate"
+                                        renderInput={(params) => <TextField {...params} />}
+                                    />
+                                </LocalizationProvider>
+                            </FormControl>
+                        </Grid>
+
+                        <Grid xs={12} item={true} sm={6} lg={6}>
+                            <FormControl fullWidth>
+                            <LocalizationProvider dateAdapter={AdapterDateFns}>
+                            <TimePicker
+                              label="Select Time"
+                              value={timeOfJourney}
+                              onChange={handleTimeChange}
+                              renderInput={(params) => <TextField {...params} />}
+                            />
+                          </LocalizationProvider>
+                            </FormControl>
+                        </Grid>
 
           <Grid item xs={12}>
             <Button type="submit" variant="contained" color="primary">

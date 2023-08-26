@@ -70,8 +70,8 @@ function AddRoute() {
       <h2>Add New Route</h2>
       <SnackToast open={openSnack} onClose={handleClose} severity={severity} message={message} />
       <form onSubmit={handleSubmit}>
-        <Grid container spacing={4}>
-          <Grid item xs={12}>
+        <Grid container spacing={2}>
+          <Grid item xs={8}>
             <Autocomplete
               options={cityList}
               getOptionLabel={(option) => option.city}
@@ -83,7 +83,7 @@ function AddRoute() {
             />
           </Grid>
 
-          <Grid item xs={12}>
+          <Grid item xs={8}>
             <Autocomplete
               options={cityList}
               getOptionLabel={(option) => option.city}
@@ -94,7 +94,7 @@ function AddRoute() {
               )}
             />
           </Grid>
-          <Grid item xs={12}>
+          <Grid item xs={5}>
             <TextField
               label="Distance between"
               variant="outlined"

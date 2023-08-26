@@ -51,7 +51,7 @@ function Routes() {
   return (
     <Box>
       <SnackToast open={openSnack} onClose={handleClose} severity={severity} message={message} />
-      <h2>Routes</h2>
+      <h2>Existing Routes</h2>
       <Table>
         <TableHead>
           <TableRow>

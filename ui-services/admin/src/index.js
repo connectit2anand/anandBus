@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
-// import './Style/Global.scss';
+import './Style/Global.scss';
 import { ToastProvider } from 'rc-toastr';
 import reportWebVitals from './reportWebVitals';
 

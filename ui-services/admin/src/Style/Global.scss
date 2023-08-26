@@ -1,0 +1,586 @@
+@use './variables' as vars;
+
+html {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+  background-color: vars.$light1;
+}
+
+.main {
+  padding: 2rem;
+}
+
+a {
+  color: vars.$highlight1;
+}
+
+.formGroup {
+//  margin-bottom: 1.5rem;
+  .form-label {
+    display: block;
+    margin-bottom: 1rem;
+  }
+  .form-control {
+    border-radius: 30px;
+    border: 1px solid #d4d5d6;
+    line-height: 2.15;
+    padding: 0.5rem 1rem;
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.161);
+    &:focus {
+      border-color: vars.$highlight1;
+      box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.161);
+    }
+  }
+  .form-control-inline {
+    display: inline-block;
+    width: auto;
+    border:1px solid #d4d5d6;
+    padding: 5px 10px;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.161);
+    &:focus,&:focus-visible {
+      border-color: vars.$highlight1;
+      box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.161);
+    }
+  }
+}
+.form-error {
+  background-color: #fdd9d9;
+  padding: 0.1rem 1rem;
+  display: inline-block;
+  color: red;
+  border-radius: 0 0 10px 10px;
+  margin-left: 15px;
+  font-size: 12px;
+}
+
+.pageHeader {
+  border-bottom: 1px solid vars.$dark1;
+  margin-bottom: 2rem;
+
+  h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: vars.$base1
+  }
+
+}
+
+.pageWrapper {
+  .form-inline {
+    display: flex;
+    flex-wrap: wrap;
+    .formSubmitBtn {
+      background-color: vars.$base1;
+    }
+    .formGroup {
+    //  margin-right: 2rem;
+    //  margin-bottom: 1rem;
+      .form-label {
+        display: block;
+        color: vars.$highlight1;
+        font-weight: 500;
+      }
+      .form-control-inline {
+        border: 1px solid #706f6f;
+        &:focus {
+          border-color: vars.$highlight1;
+          box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.161);
+        }
+      }
+    }
+  }
+
+.button-1 {
+  background-color: vars.$base1;
+  border-width: 2px;
+  border-color: vars.$base1;
+  color: vars.$white1;
+  &:hover {
+    background-color: vars.$highlight1; 
+  }
+  &.large-button {
+    display: inline-block;
+    text-align: center;
+    padding: 2rem;
+    div {
+      margin-top: 1rem;
+    }
+  }
+}
+
+.button-2 {
+  background-color: vars.$white1;
+  border-color: vars.$base1;
+  border-width: 1px;
+  color: vars.$base1;
+  &:hover {
+    border-color: vars.$highlight1;
+    color: vars.$highlight1;
+  }
+}
+
+.rowFlexEnd {
+  display: flex;
+  justify-content:flex-end;
+}
+  .formRow {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: end;
+    .formSubmitBtn {
+      background-color: vars.$base1;
+      &:hover {
+        background-color: vars.$base2; 
+      }
+    }
+  }
+
+.MuiMenuItem-root {
+  background-color: #ff0000;
+  color: #fff;
+}
+
+  .innerLink {
+    border-radius: 30px;
+    background-color: vars.$dark1;
+    color: #fff;
+    display: block;
+    padding: 0.5rem 1rem;
+    margin-right: 1rem;
+    text-decoration: none;
+    &.active {
+      background-color: vars.$base1;
+    }
+  }
+
+//DATA TABLE
+
+.rdt_TableHeadRow {
+  background-color: vars.$thead;
+  color: #000;
+  font-size: 1rem;
+  .rdt_TableCol:not(:first-child) {
+    border-left: 1px solid #ccc;
+}
+}
+
+.tbPill{ 
+  span {
+  display: inline-block;
+  background-color: vars.$base1;
+  color:#fff;
+  margin: 3px;
+  padding: 2px 5px;
+  border-radius: 10px;
+  &:nth-child(2) {
+    background-color: #dedede;
+    color:#000
+  }
+  &:nth-child(3) {
+    background-color: vars.$highlight1;
+  }
+  &.color1 {
+    background-color: #3d5afe;
+    color:#fff;
+  }
+  &.color2 {
+    background-color: #26c6da;
+    color:#fff;
+  }  
+  &.color3 {
+    background-color: #8bc34a;
+    color:#fff;
+  }
+  &.color4 {
+    background-color: #ffc107;
+    color:#000
+  }  
+  &.color5 {
+    background-color: #512da8;
+    color:#fff;
+  } 
+}
+}
+
+.uploadFormsec {
+  .MuiCardHeader-root {
+    border-bottom: 1px solid #ddd;
+  }
+  h3,.MuiCardHeader-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color:vars.$base1;
+    margin: 0;
+  }
+}
+
+
+.tilesButton {
+  .MuiCardHeader-root {
+    border-bottom: 1px solid #ddd;
+    padding: 1rem;
+  }
+h3,.MuiCardHeader-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color:vars.$base1;
+  margin: 0;
+}
+}
+
+}
+
+//Issuer Options
+.issuerModal {
+  z-index: 1 !important;
+}
+
+.Modal {
+
+  .issuerOptions {
+    text-align: center;
+    div {
+      text-align: center;
+      cursor: pointer;
+      display: inline-block;
+      span {
+        display: block;
+        padding: 10px;
+      }
+    }
+  }
+
+
+.button-1 {
+  background-color: vars.$base1;
+  border-width: 2px;
+  border-color: vars.$base1;
+  color: vars.$white1;
+  margin-top: 2rem;
+  &:hover {
+    background-color: vars.$highlight1; 
+  }
+  &.large-button {
+    display: inline-block;
+    text-align: center;
+    padding: 2rem;
+    div {
+      margin-top: 1rem;
+    }
+  }
+}
+
+.button-2 {
+  background-color: vars.$white1;
+  border-color: vars.$base1;
+  border-width: 1px;
+  color: vars.$base1;
+  margin-top: 2rem;
+  margin-right: 1rem;
+  &:hover {
+    border-color: vars.$highlight1;
+    color: vars.$highlight1;
+  }
+}
+.success {
+  color:green;
+  font-size: 0.9rem;
+}
+.error {
+  color:red;
+  font-size: 0.9rem;
+}
+
+
+.rdt_TableHeadRow {
+  background-color: vars.$thead;
+  color: #000;
+  font-size: 1rem;
+  .rdt_TableCol:not(:first-child) {
+    border-left: 1px solid #ccc;
+}
+}
+
+.tbPill{ 
+  span {
+  display: inline-block;
+  background-color: vars.$base1;
+  color:#fff;
+  margin: 3px;
+  padding: 2px 5px;
+  border-radius: 10px;
+  &:nth-child(2) {
+    background-color: #dedede;
+    color:#000
+  }
+  &:nth-child(3) {
+    background-color: vars.$highlight1;
+  }
+}
+}
+
+div[contenteditable=true] {
+  width: 100%;
+}
+
+}
+
+
+//  React Checkbox Tree
+
+
+//MUI Form
+
+.Mui-error {
+  font-size: 0.8rem;
+  color: #d43636;
+  border-bottom: 1px solid #ffe8e8;
+}
+
+//Dropzone style
+
+.MuiDropzoneArea-root {
+  border-width: 1px;
+  border-color: #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  border: 1px solid #ccc !important;
+}
+
+.MuiDropzoneArea-root {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.css-r1hick-MuiGrid-root>.MuiGrid-item {
+  margin: auto !important;
+}
+.MuiDropzonePreviewList-imageContainer {
+  margin: auto !important;
+}
+.MuiDropzonePreviewList-image {
+  height: auto !important;
+  max-height: 100% !important;
+}
+
+// Multi Steps Form
+
+.user-form__tabs {
+margin-bottom: 1rem;
+  .user-form__tab {
+      padding: 1rem;
+      background-color: #D4D5D6;
+      color: #000;
+      margin-left: 2px;
+      &.is-active {
+        background-color: vars.$base1; 
+        color: #fff;
+      }
+      &:first-child {
+        border-radius: 5px 0 0 5px;
+      }
+      &:last-child {
+        border-radius: 0 5px 5px 0;
+      }
+      svg {
+        margin-right: 1rem;
+      }
+  }
+}
+
+.DialogHeader-title{
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #002347;
+  margin: 1px;
+  padding: 0.9375rem 0rem 0rem 1.56rem
+}
+
+.DialogHeader-title2{
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #FF9636;
+  margin: 1px;
+  padding: 0.9375rem 0rem 0rem 8rem
+}
+
+.DialogCardHeader-title{
+font-size: 0.9rem;
+font-weight: 400;
+color: #002347;
+margin: 0;
+}
+
+.dialogStyle{
+  margin: 15px 20px 5px 20px;
+  overflow: visible;
+}
+
+.DeleteHeader-title{
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #FF9636;
+  margin: 1px;
+  padding: 0.9375rem 0rem 0rem 1.56rem;
+  text-align: center;
+}
+
+.align-right {
+  display: flex !important;
+  justify-content: right !important;
+}
+
+.dialogStyle2{
+  //margin: 15px 20px 5px 20px;
+  overflow: visible;
+  text-align: center;
+  position: relative;
+  padding-right: 0.5rem;
+  padding-bottom: 0.4rem;
+}
+
+.DeleteHeader-title2{
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #FF9636;
+  margin: 1px;
+  padding: 1.4rem;
+  text-align: center;
+  position: relative;
+}
+
+.addnewButtonLink {
+  &:hover {
+    color: #fff;
+  }
+}
+
+.btnTooltip {
+  position: absolute;
+  right: 10px;
+  top:10px;
+  z-index: 99;
+}
+
+.productIcon {
+  width:25px;
+  margin: 2px;
+  height: auto;
+}
+
+.adminIons {
+  width:40px;
+  height: auto;
+}
+//**************************************
+
+.legendRow {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+  .legendItem {
+    margin-right: 1rem;
+    display: flex;
+    align-items: center;
+    svg {
+      margin-right: 5px;
+    }
+  }
+}
+
+.fileBrowser {
+  border:1px solid #ccc;
+  border-radius: 5px;
+  padding: 11px 0px 11px 8px;
+}
+
+.riderBrochure a {
+  background-color: #fbdbc1;
+  padding: 5px 10px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.home-editor {
+  border: 1px solid #f1f1f1 !important;
+  padding: 5px !important;
+  border-radius: 2px !important;
+  min-height: 12em;
+  height: 80% !important;
+}
+
+
+.categoryMgmt {
+  .listing {
+    padding: 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    .catName {
+      max-width: 250px;
+      width: 100%;
+      padding: 10px;
+      border-radius: 5px;
+      transition: 0.3s all;
+      &:hover {
+        background-color: #eee;
+      }
+    }
+  }
+}
+
+.categoryManagement {
+  .addNew {
+    color: vars.$base1;
+    background-color: vars.$dark2;
+    padding: 5px 10px;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    margin-bottom: 0.5rem;
+    margin-top: 0.5rem;
+    display: inline-block;
+    cursor: pointer;
+  }
+  .MuiTreeItem-content > .MuiTreeItem-label {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #5e5e5e;
+  }
+  .treeNode {
+    .MuiTreeItem-label{
+      font-size: 1.1rem;
+    }
+  }
+}
+
+
+.providerDetail {
+  .textbox {
+    span {
+      font-size: 0.9rem;
+      color:vars.$dark1;
+    }
+    p {
+      font-weight: 700;
+    }
+    input {
+      &[disabled=''] {
+        border: 0 none;
+        color: #000;
+        background-color: transparent;
+        font-weight: 700;
+      }
+    }
+  }
+}

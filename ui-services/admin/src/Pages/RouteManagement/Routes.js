@@ -11,8 +11,8 @@ import axios from "axios";
 import SnackToast from "../../components/SnackToast/Index";
 
 const columns = [
-  { id: "to", label: "To", minWidth: 150 },
-  { id: "from", label: "From", minWidth: 150 },
+  { id: "routeFrom", label: "From", minWidth: 150 },
+  { id: "routeTo", label: "To", minWidth: 150 },
   { id: "distance", label: "Distance", minWidth: 150 },
 ];
 

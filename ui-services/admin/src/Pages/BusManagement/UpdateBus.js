@@ -23,7 +23,7 @@ import { min } from "date-fns";
 
 const baseUrl = 'http://localhost:8080'
 
-function AddBus() {
+function UpdateBus() {
   const [busNumber, setBusNumber] = useState(null);
   const [busName, setBusName] = useState(null);
   const [driverName, setDriverName] = useState("");
@@ -33,6 +33,7 @@ function AddBus() {
   const [routes, setRoutes] = useState([]);
   const [routeId, setRouteId] = useState();
   const [dateOfJourney, setDateOfJourney] = useState(null)
+  const [busList, setBusList] = useState([]);
 
   const [openSnack, setOpenSnack] = useState(false);
   const [loading, setLoading] = useState();
@@ -53,13 +54,6 @@ function AddBus() {
     setDriverName(event.target.value);
   }
 
-  const handleTotalSeatChange = (event) => {
-    setTotalSeat(event.target.value);
-  }
-
-  const handleBusTypeChange = (event) => {
-    setBusType(event.target.value);
-  }
 
   const handleFairChange = (event) => {
     setFair(event.target.value);
@@ -106,11 +100,8 @@ const getTime = (time) => {
     let aTime = getTime(arrivalTime);
     setLoading(true);
     let request = {
-      busNumber: busNumber,
       busName: busName,
       driverName: driverName,
-      busType: busType,
-      seats: totalSeat,
       busJourneyDate: date,
       departureTime: dTime,
       arrivalTime: aTime,
@@ -148,6 +139,15 @@ const getTime = (time) => {
       setSeverity('error');
       setMessage("Error in getting routes.");
     })
+    axios.get(`${baseUrl}/getAllBuses`)
+    .then(res => {
+      setBusList(res.data);
+    })
+    .catch(err => {
+      setOpenSnack(true);
+      setSeverity('error');
+      setMessage("Error in getting bus list.");
+    })
   },[])
 
   const handleRouteChange = (event) => {
@@ -165,15 +165,29 @@ const getTime = (time) => {
   return (
     <Container maxWidth="sm">
       {Loading ? <Loading open={loading} /> : ""}
-      <h2>Add New Bus</h2>
+      <h2>Update Bus</h2>
       <SnackToast open={openSnack} onClose={handleClose} severity={severity} message={message} />
       <form onSubmit={handleSubmit}>
       <Grid container mb={2} spacing={2} >
-        <Grid xs={12} item={true} sm={6} lg={12}>
+          <Grid xs={12} item={true} sm={6} lg={6}>
             <FormControl fullWidth>
-              <InputLabel>Select Route</InputLabel>
+              <InputLabel>Select Bus Number</InputLabel>
               <Select
-                onChange={handleRouteChange} input={<OutlinedInput label="Select Route" />}>
+                onChange={handleBusNumberChange} input={<OutlinedInput label="Select Bus Number" />}>
+                {busList.map((bus, index) => {
+                  return <MenuItem 
+                            key={index} 
+                            value={bus.busId}>
+                            {bus.busNumber}
+                          </MenuItem>})}
+              </Select>
+            </FormControl>
+          </Grid>
+          <Grid xs={12} item={true} sm={6} lg={6}>
+            <FormControl fullWidth>
+              <InputLabel>Select New Route</InputLabel>
+              <Select
+                onChange={handleRouteChange} input={<OutlinedInput label="Select New Route" />}>
                 {routes.map((route, index) => {
                   return <MenuItem 
                             key={index} 
@@ -182,14 +196,6 @@ const getTime = (time) => {
                           </MenuItem>})}
               </Select>
             </FormControl>
-          </Grid>
-          <Grid xs={12} item={true} sm={6} lg={6}>
-            <TextField fullWidth
-              label="Bus Number"
-              variant="outlined"
-              value={busNumber}
-              onChange={handleBusNumberChange}
-            />
           </Grid>
           <Grid xs={12} item={true} sm={6} lg={6}>
             <TextField fullWidth
@@ -207,25 +213,7 @@ const getTime = (time) => {
               onChange={handleDriverNameChange}
             />
           </Grid>
-          <Grid xs={12} item={true} sm={6} lg={6}>
-            
-            <FormControl fullWidth>
-            <InputLabel>Bus Type</InputLabel>
-              <Select onChange={handleBusTypeChange} input={<OutlinedInput label="Bus Type" />}>
-                    <MenuItem key={1} value="AC">AC</MenuItem>
-                    <MenuItem key={2} value="NON-AC">NON-AC</MenuItem>
-              </Select>
-            </FormControl>
-          </Grid>
-         
-          <Grid xs={12} item={true} sm={6} lg={6}>
-            <TextField fullWidth
-              label="Total Seats"
-              variant="outlined"
-              value={totalSeat}
-              onChange={handleTotalSeatChange}
-            />
-          </Grid>
+
           <Grid xs={12} item={true} sm={6} lg={6}>
             <TextField fullWidth
               label="Fair"
@@ -288,4 +276,4 @@ const getTime = (time) => {
   );
 }
 
-export default AddBus;
+export default UpdateBus;

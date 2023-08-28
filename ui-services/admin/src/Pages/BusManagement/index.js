@@ -39,7 +39,7 @@ function BusManagement(props) {
                 </Button>
                 </Grid>
                 <Grid xs={12} item={true} sm={4}>
-                <Button component={Link} to="/issuermanagement/managecontent" fullWidth className="button-1 large-button" variant="contained">
+                <Button component={Link} to="/busmanagement/updatebus" fullWidth className="button-1 large-button" variant="contained">
                 <HtmlTooltip title={<span>Update Bus: Click this button to update Bus</span>}><InfoCircle className="btnTooltip" color="#fff" size={20}/></HtmlTooltip>
 
                     <Gear size={40}/>
@@ -48,7 +48,7 @@ function BusManagement(props) {
                 </Grid>
 
                 <Grid xs={12} item={true} sm={4}>
-                <Button component={Link} to="/issuermanagement/providermanagement" fullWidth className="button-1 large-button" variant="contained">
+                <Button component={Link} to="/busmanagement/viewallbus" fullWidth className="button-1 large-button" variant="contained">
                 <HtmlTooltip title={<span>Manage Provider: Click this button to <br/>Upload Provider List<br/>Configure List</span>}><InfoCircle className="btnTooltip" color="#fff" size={20}/></HtmlTooltip>
 
                     <Eye size={40}/>

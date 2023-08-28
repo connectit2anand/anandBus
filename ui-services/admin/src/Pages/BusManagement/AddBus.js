@@ -19,6 +19,7 @@ import { useEffect } from "react";
 import { DesktopDatePicker, LocalizationProvider, TimePicker } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns"
+import { min } from "date-fns";
 
 const baseUrl = 'http://localhost:8080'
 
@@ -37,7 +38,12 @@ function AddBus() {
   const [loading, setLoading] = useState();
   const [severity, setSeverity] = useState('success');
   const [message, setMessage] = useState('');
-  const [timeOfJourney, setTimeOfJourney] = useState(null);
+  const [departureTime, setDepartureTime] = useState(null);
+  const [arrivalTime, setArrivalTime] = useState(null);
+
+  const handleArrivalTimeChange = (event) => {
+    setArrivalTime(event);
+  }
 
   const handleBusNameChange = (event) => {
     setBusName(event.target.value);
@@ -72,7 +78,7 @@ function AddBus() {
     if (dd.length == 1) {
         dd = 0 + dd;
     }
-    let mm = new Date(date).getMonth() + "";
+    let mm = (+new Date(date).getMonth() + 1) + "";
     if (mm.length == 1) {
         mm = 0 + mm;
     }
@@ -81,9 +87,23 @@ function AddBus() {
     return updatedDate;
 }
 
+const getTime = (time) => {
+  let hours = time.getHours() + '';
+  let mins = time.getMinutes() + '';
+  if(hours.length == 1) {
+    hours = 0 + hours;
+  }
+  if(mins.length == 1) {
+    mins = 0 + mins;
+  }
+  return `${hours}:${mins}:00`;
+}
+
   const handleSubmit = (event) => {
     event.preventDefault();
     let date = getDate(dateOfJourney);
+    let dTime = getTime(departureTime);
+    let aTime = getTime(arrivalTime);
     setLoading(true);
     let request = {
       busNumber: busNumber,
@@ -91,6 +111,9 @@ function AddBus() {
       driverName: driverName,
       busType: busType,
       seats: totalSeat,
+      busJourneyDate: date,
+      departureTime: dTime,
+      arrivalTime: aTime
     }
     axios.post(`${baseUrl}/addBus/${routeId}`, request)
     .then(res => {
@@ -135,7 +158,7 @@ function AddBus() {
   }
 
   const handleTimeChange = (event) => {
-    setTimeOfJourney(event);
+    setDepartureTime(event);
   }
 
   return (
@@ -230,14 +253,28 @@ function AddBus() {
                             <FormControl fullWidth>
                             <LocalizationProvider dateAdapter={AdapterDateFns}>
                             <TimePicker
-                              label="Select Time"
-                              value={timeOfJourney}
+                              label="Arrival Time"
+                              value={arrivalTime}
+                              onChange={handleArrivalTimeChange}
+                              renderInput={(params) => <TextField {...params} />}
+                            />
+                          </LocalizationProvider>
+                            </FormControl>
+                        </Grid>
+
+                        <Grid xs={12} item={true} sm={6} lg={6}>
+                            <FormControl fullWidth>
+                            <LocalizationProvider dateAdapter={AdapterDateFns}>
+                            <TimePicker
+                              label="Departure Time"
+                              value={departureTime}
                               onChange={handleTimeChange}
                               renderInput={(params) => <TextField {...params} />}
                             />
                           </LocalizationProvider>
                             </FormControl>
                         </Grid>
+
 
           <Grid item xs={12}>
             <Button type="submit" variant="contained" color="primary">

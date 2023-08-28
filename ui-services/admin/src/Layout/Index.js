@@ -28,7 +28,7 @@ export default function Layout(props) {
         return "Dashboard";
       // Add more cases for each route
       default:
-        return "Your App";
+        return "Welcome To Bus Admin Portal";
     }
   };
 

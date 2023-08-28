@@ -33,9 +33,9 @@ public class BusController {
 		return new ResponseEntity<Bus>(response,HttpStatus.ACCEPTED);
 	}
 	
-	@PostMapping("/updateBus")
-	public ResponseEntity<Bus> updateBus(@RequestBody Bus bus){
-		Bus newBus = busService.updateBus(bus);
+	@PostMapping("/updateBus/{busId}")
+	public ResponseEntity<Bus> updateBus(@RequestBody Bus bus,@PathVariable Integer busId){
+		Bus newBus = busService.updateBus(bus,busId);
 		return new ResponseEntity<>(newBus,HttpStatus.ACCEPTED);
 	}
 	
@@ -46,9 +46,15 @@ public class BusController {
 	}
 	
 	@GetMapping("/getAllBus/{pageNumber}/{numberOfRecords}")
-	public ResponseEntity<List<Bus>> getAllBus(@PathVariable Integer pageNumber,@PathVariable Integer numberOfRecords){
+	public ResponseEntity<List<Bus>> getAllBusPageWise(@PathVariable Integer pageNumber,@PathVariable Integer numberOfRecords){
 		List<Bus> busList = busService.getAllBus(pageNumber,numberOfRecords);
 		return new ResponseEntity<>(busList,HttpStatus.ACCEPTED);
+	}
+	
+	@GetMapping("/getAllBuses")
+	public ResponseEntity<List<Bus>> getAllBuses(){
+		List<Bus> buses = busService.getAllBusesList();
+		return new ResponseEntity<List<Bus>>(buses,HttpStatus.OK);
 	}
 	 
 }

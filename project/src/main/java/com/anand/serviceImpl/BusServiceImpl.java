@@ -56,7 +56,7 @@ public class BusServiceImpl implements BusService{
 	}
 
 	@Override
-	public Bus updateBus(Bus bus) {
+	public Bus updateBus(Bus bus,Integer busId) {
 		Bus oldBus = busRepository.findById(bus.getBusId()).orElseThrow(()-> 
 				new BusException("Bus does not exist"));
 		
@@ -80,6 +80,12 @@ public class BusServiceImpl implements BusService{
 		Pageable p =  PageRequest.of(pageNumber - 1, numberOfRecords);
 		Page<Bus> page = busRepository.findAll(p); 
 		List<Bus> buses = page.getContent();
+		return buses;
+	}
+
+	@Override
+	public List<Bus> getAllBusesList() {
+		List<Bus> buses = busRepository.findAll();
 		return buses;
 	}
 

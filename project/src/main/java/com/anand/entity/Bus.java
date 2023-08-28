@@ -42,11 +42,7 @@ public class Bus {
 	    @NotBlank(message = "Bus Type can't be null/blank, Please provide a valid bus type")
 	    private String busType;
 
-//	    @NotBlank(message = "Choose a valid starting point.")
-//	    private String routeFrom;
-//
-//	    @NotBlank(message = "Choose a valid destination.")
-//	    private String routeTo;
+
 
 	    @NotNull(message = "Bus Journey Date can't be null, Please provide correct date")
 	    @DateTimeFormat(pattern = "yyyy-MM-dd")

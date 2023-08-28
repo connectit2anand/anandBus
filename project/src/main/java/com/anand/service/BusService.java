@@ -9,11 +9,13 @@ public interface BusService {
 
 	Bus addBus(Bus bus,Integer routeId);
 
-	Bus updateBus(Bus bus);
+	Bus updateBus(Bus bus, Integer busId);
 
 	String deleteBus(Integer busId);
 	
 	
 	List<Bus> getAllBus(Integer pageNumber,Integer numberOfRecords);
+
+	List<Bus> getAllBusesList();
 
 }

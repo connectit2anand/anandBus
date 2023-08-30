@@ -12,6 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.anand.entity.Bus;
+import com.anand.entity.BusDto;
 import com.anand.entity.Reservation;
 import com.anand.entity.Route;
 import com.anand.exception.BusException;
@@ -56,14 +57,26 @@ public class BusServiceImpl implements BusService{
 	}
 
 	@Override
-	public Bus updateBus(Bus bus,Integer busId) {
-		Bus oldBus = busRepository.findById(bus.getBusId()).orElseThrow(()-> 
-				new BusException("Bus does not exist"));
+	public Bus updateBus(BusDto busDto,Integer routeId) {
+		Route route = routeRepository.findById(routeId).orElseThrow(()-> new RouteException("Invalid Route id"));
 		
-		if(bus.getAvailableSeats() > bus.getSeats()) {
-			throw new BusException("Please Enter Correct Number Of Total and Available Seats");
+		List<Bus> busList = route.getBusList();
+		
+		List<Bus> buses = busRepository.findByBusNumber(busDto.getBusNumber());
+		if(buses.size() != 1) {
+			throw new BusException("Please Enter Valid Bus Number");
 		}
-		busRepository.save(bus);
+		Bus bus = buses.get(0);
+		bus.setBusName(busDto.getBusName());
+		bus.setDriverName(busDto.getDriverName());
+		bus.setFare(busDto.getFare());
+		if(busDto.getBusJourneyDate().isBefore(LocalDate.now())) {
+			throw new BusException("Please Enter valid journey date");
+		}
+		bus.setBusJourneyDate(busDto.getBusJourneyDate());
+		bus.setArrivalTime(busDto.getArrivalTime());
+		bus.setDepartureTime(busDto.getDepartureTime());
+		
 		return bus;
 	}
 

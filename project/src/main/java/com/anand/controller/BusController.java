@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.anand.entity.Bus;
+import com.anand.entity.BusDto;
 import com.anand.service.BusService;
 
 
@@ -33,9 +34,9 @@ public class BusController {
 		return new ResponseEntity<Bus>(response,HttpStatus.ACCEPTED);
 	}
 	
-	@PostMapping("/updateBus/{busId}")
-	public ResponseEntity<Bus> updateBus(@RequestBody Bus bus,@PathVariable Integer busId){
-		Bus newBus = busService.updateBus(bus,busId);
+	@PostMapping("/updateBus/{routeId}")
+	public ResponseEntity<Bus> updateBus(@RequestBody BusDto busDto,@PathVariable Integer routeId){
+		Bus newBus = busService.updateBus(busDto,routeId);
 		return new ResponseEntity<>(newBus,HttpStatus.ACCEPTED);
 	}
 	

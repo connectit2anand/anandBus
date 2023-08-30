@@ -4,12 +4,13 @@ import java.util.List;
 
 
 import com.anand.entity.Bus;
+import com.anand.entity.BusDto;
 
 public interface BusService {
 
 	Bus addBus(Bus bus,Integer routeId);
 
-	Bus updateBus(Bus bus, Integer busId);
+	Bus updateBus(BusDto busDto, Integer routeId);
 
 	String deleteBus(Integer busId);
 	

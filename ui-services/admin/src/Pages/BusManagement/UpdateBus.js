@@ -24,11 +24,9 @@ import { min } from "date-fns";
 const baseUrl = 'http://localhost:8080'
 
 function UpdateBus() {
-  const [busNumber, setBusNumber] = useState(null);
+  const [busId, setBusId] = useState(null);
   const [busName, setBusName] = useState(null);
   const [driverName, setDriverName] = useState("");
-  const [busType, setBusType] = useState("");
-  const [totalSeat, setTotalSeat] = useState("");
   const [fair, setFair] = useState("");
   const [routes, setRoutes] = useState([]);
   const [routeId, setRouteId] = useState();
@@ -59,8 +57,8 @@ function UpdateBus() {
     setFair(event.target.value);
   }
   
-  const handleBusNumberChange = (event) => {
-    setBusNumber(event.target.value);
+  const handleBusIdChange = (event) => {
+    setBusId(event.target.value);
   }
   
   const handleClose = () => {
@@ -105,14 +103,14 @@ const getTime = (time) => {
       busJourneyDate: date,
       departureTime: dTime,
       arrivalTime: aTime,
-      fair: fair
+      fare: fair
     }
-    axios.post(`${baseUrl}/addBus/${routeId}`, request)
+    axios.post(`${baseUrl}/updateBus/${busId}/${routeId}`, request)
     .then(res => {
       setLoading(false);
       setOpenSnack(true);
       setSeverity('success');
-      setMessage("Bus Added Successfully");
+      setMessage("Bus Updated Successfully");
     })
     .catch(err => {
       setLoading(false)
@@ -173,7 +171,7 @@ const getTime = (time) => {
             <FormControl fullWidth>
               <InputLabel>Select Bus Number</InputLabel>
               <Select
-                onChange={handleBusNumberChange} input={<OutlinedInput label="Select Bus Number" />}>
+                onChange={handleBusIdChange} input={<OutlinedInput label="Select Bus Number" />}>
                 {busList.map((bus, index) => {
                   return <MenuItem 
                             key={index} 

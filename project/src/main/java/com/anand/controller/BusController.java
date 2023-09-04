@@ -34,10 +34,11 @@ public class BusController {
 		return new ResponseEntity<Bus>(response,HttpStatus.ACCEPTED);
 	}
 	
-	@PostMapping("/updateBus/{routeId}")
-	public ResponseEntity<Bus> updateBus(@RequestBody BusDto busDto,@PathVariable Integer routeId){
-		Bus newBus = busService.updateBus(busDto,routeId);
-		return new ResponseEntity<>(newBus,HttpStatus.ACCEPTED);
+	@PostMapping("/updateBus/{busId}/{routeId}")
+	public ResponseEntity<String> updateBus(@RequestBody BusDto busDto,
+			@PathVariable Integer routeId, @PathVariable Integer busId){
+		String response = busService.updateBus(busId, busDto,routeId);
+		return new ResponseEntity<>(response,HttpStatus.ACCEPTED);
 	}
 	
 	@DeleteMapping("/deleteBus/{busId}")

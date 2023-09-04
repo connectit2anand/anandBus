@@ -10,7 +10,7 @@ public interface BusService {
 
 	Bus addBus(Bus bus,Integer routeId);
 
-	Bus updateBus(BusDto busDto, Integer routeId);
+	String updateBus(Integer busId, BusDto busDto, Integer routeId);
 
 	String deleteBus(Integer busId);
 	

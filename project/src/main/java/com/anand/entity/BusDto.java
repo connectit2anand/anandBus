@@ -13,10 +13,10 @@ import lombok.Data;
 public class BusDto {
 	
 	
-	@NotBlank(message = "Bus number can't be null/blank, Please provide bus number!")
- 	private String busNumber;
+//	@NotBlank(message = "Bus number can't be null/blank, Please provide bus number!")
+// 	private String busNumber;
 	
-	private Integer routeId;
+//	private Integer routeId;
 	
 	
 	@NotBlank(message = "Bus name can't be null/blank, Please provide a valid name first!")

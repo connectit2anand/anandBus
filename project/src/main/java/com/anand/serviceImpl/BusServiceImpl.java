@@ -45,7 +45,9 @@ public class BusServiceImpl implements BusService{
 		if(busJourneyDate.isBefore(LocalDate.now())) {
 			throw new BusException("Please Enter Valid Bus Journey Date");
 		}
-		
+		bus.setAvailableSeats(bus.getSeats());
+		bus.setSeats(bus.getSeats());
+		bus.setFare(bus.getFare());
 		List<Reservation> reservationList = new ArrayList<>();
 		bus.setReservationList(reservationList);
 		List<Bus> busList = route.getBusList();
@@ -57,16 +59,17 @@ public class BusServiceImpl implements BusService{
 	}
 
 	@Override
-	public Bus updateBus(BusDto busDto,Integer routeId) {
+	public String updateBus(Integer busId, BusDto busDto,Integer routeId) {
 		Route route = routeRepository.findById(routeId).orElseThrow(()-> new RouteException("Invalid Route id"));
 		
 		List<Bus> busList = route.getBusList();
 		
-		List<Bus> buses = busRepository.findByBusNumber(busDto.getBusNumber());
-		if(buses.size() != 1) {
-			throw new BusException("Please Enter Valid Bus Number");
-		}
-		Bus bus = buses.get(0);
+//		List<Bus> buses = busRepository.findByBusNumber(busDto.getBusNumber());
+//		if(buses.size() != 1) {
+//			throw new BusException("Please Enter Valid Bus Number");
+//		}
+//		Bus bus = buses.get(0);
+		Bus bus = busRepository.getById(busId);
 		bus.setBusName(busDto.getBusName());
 		bus.setDriverName(busDto.getDriverName());
 		bus.setFare(busDto.getFare());
@@ -76,8 +79,11 @@ public class BusServiceImpl implements BusService{
 		bus.setBusJourneyDate(busDto.getBusJourneyDate());
 		bus.setArrivalTime(busDto.getArrivalTime());
 		bus.setDepartureTime(busDto.getDepartureTime());
-		
-		return bus;
+		bus.setRoute(route);
+		busList.add(bus);
+		route.setBusList(busList);
+		routeRepository.save(route);
+		return "Bus Successfully updated";
 	}
 
 	@Override

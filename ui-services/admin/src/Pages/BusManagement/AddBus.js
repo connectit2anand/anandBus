@@ -29,7 +29,7 @@ function AddBus() {
   const [driverName, setDriverName] = useState("");
   const [busType, setBusType] = useState("");
   const [totalSeat, setTotalSeat] = useState("");
-  const [fair, setFair] = useState("");
+  const [fare, setFare] = useState("");
   const [routes, setRoutes] = useState([]);
   const [routeId, setRouteId] = useState();
   const [dateOfJourney, setDateOfJourney] = useState(null)
@@ -62,7 +62,7 @@ function AddBus() {
   }
 
   const handleFairChange = (event) => {
-    setFair(event.target.value);
+    setFare(event.target.value);
   }
   
   const handleBusNumberChange = (event) => {
@@ -114,7 +114,7 @@ const getTime = (time) => {
       busJourneyDate: date,
       departureTime: dTime,
       arrivalTime: aTime,
-      fair: fair
+      fare: fare
     }
     axios.post(`${baseUrl}/addBus/${routeId}`, request)
     .then(res => {
@@ -228,9 +228,9 @@ const getTime = (time) => {
           </Grid>
           <Grid xs={12} item={true} sm={6} lg={6}>
             <TextField fullWidth
-              label="Fair"
+              label="Fare"
               variant="outlined"
-              value={fair}
+              value={fare}
               onChange={handleFairChange}
             />
           </Grid>
